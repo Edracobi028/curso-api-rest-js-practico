@@ -1,0 +1,19 @@
+{
+  "name": "curso-api-rest-js-practico",
+  "version": "1.0.0",
+  "description": "Proyecto con API REST y JavaScript  con conexión a una API real. Single Page Application con hash navigation y un buscador de películas de TheMovieDB.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edracobi028/curso-api-rest-js-practico.git"
+  },
+  "author": "Edraoci028",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Edracobi028/curso-api-rest-js-practico/issues"
+  },
+  "homepage": "https://github.com/Edracobi028/curso-api-rest-js-practico#readme"
+}
