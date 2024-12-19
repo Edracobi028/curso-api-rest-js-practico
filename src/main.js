@@ -1,14 +1,21 @@
 
 //console.log("API URL = http://dfgdfgfd.com/retrert?api_key=" + API_KEY);
+//Crear una instancia de axios con la config como la base de url y apikey
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3',
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+    },
+    params: {
+        'api_key': API_KEY,
+    },
+});
 
 //Crear una funcion asincrona para obtener las peliculas en tendencia
 async function getTrendingMoviesPreview() {
-    
-    const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY); //fetch asincrono + API KEY
-    const data = await res.json(); // Peticion asincrona que recibe data del fetch page y results
+    const { data } = await api('trending/movie/day'); //obtener por axios llamar api asincrono + API KEY
     const movies = data.results;
 
-    //console.log('data= ', data, 'Results = ' , movies);
     //Iterar para cargar con cada pelicula las tarjetas del index
     movies.forEach(movie  => {
         const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList'); //apuntar al contenedor con el id y la clase
@@ -33,8 +40,7 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
     
-    const res = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=' + API_KEY); //fetch asincrono + API KEY
-    const data = await res.json(); // Peticion asincrona que recibe data del fetch page y results
+    const { data } = await api('genre/movie/list'); //obtener por axios llamar api asincrono + API KEY
     const categories = data.genres;
 
     //console.log('data= ', data, 'Results = ' , movies);
