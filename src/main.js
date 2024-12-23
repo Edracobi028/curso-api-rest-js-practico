@@ -67,5 +67,3 @@ async function getCategoriesPreview() {
 
 }
 
-getTrendingMoviesPreview(); //Llamar a la funcion
-getCategoriesPreview(); //Llamar a la funcion
