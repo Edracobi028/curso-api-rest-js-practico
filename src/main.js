@@ -18,7 +18,7 @@ async function getTrendingMoviesPreview() {
 
     //Iterar para cargar con cada pelicula las tarjetas del index
     movies.forEach(movie  => {
-        const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList'); //apuntar al contenedor con el id y la clase
+        const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList'); //apuntar al contenedor con el id y la clase
         
         const movieContainer = document.createElement('div'); //crear un div y 
         movieContainer.classList.add('movie-container');  // agregar la clase del css movie-container'
@@ -32,7 +32,7 @@ async function getTrendingMoviesPreview() {
         
         //conectar los elementos creados al elemento del index
         movieContainer.appendChild(movieImg); // meter la img al div
-        trendingPreviewMoviesContainer.appendChild(movieContainer); // meter el container a la seccion
+        trendingMoviesPreviewList.appendChild(movieContainer); // meter el container a la seccion
 
     });
 
@@ -46,7 +46,7 @@ async function getCategoriesPreview() {
     //console.log('data= ', data, 'Results = ' , movies);
     //Iterar para cargar con cada pelicula las tarjetas del index
     categories.forEach(category  => {
-        const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list'); //apuntar al article con el id de section y la clase del article
+        const categoriesPreviewList = document.querySelector('#categoriesPreview .categoriesPreview-list'); //apuntar al article con el id de section y la clase del article
         
         const categoryContainer = document.createElement('div'); //crear un div
         categoryContainer.classList.add('category-container');  // agregar la clase del css que se le diseño'
@@ -61,7 +61,7 @@ async function getCategoriesPreview() {
         //conectar los elementos creados al elemento del index
         categoryTitle.appendChild(categoryTitleText);  // meter el texto al h3
         categoryContainer.appendChild(categoryTitle); // meter la h3 al div
-        previewCategoriesContainer.appendChild(categoryContainer); // meter el container a la seccion
+        categoriesPreviewList.appendChild(categoryContainer); // meter el container a la seccion
 
     });
 
