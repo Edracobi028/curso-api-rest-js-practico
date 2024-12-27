@@ -96,6 +96,13 @@ function categoriesPage() {
     categoriesPreviewSection.classList.add('inactive'); //Aparecer
     genericSection.classList.remove('inactive'); //Ocultar    
     movieDetailSection.classList.add('inactive'); //Ocultar 
+
+    //Obtener el id para enviar en la funcion
+    const [_,categoryData] = location.hash.split('='); //Nombramos sus dos partes y Separamos en dos la url 
+    const [categoryId, categoryName] =  categoryData.split('-'); //Dividir el id y nombre de categoria
+
+    headerCategoryTitle.innerHTML = categoryName;  //insertar el nombre de la categoria usando el extraido
+    getMoviesByCategory(categoryId); //Llamar a la funcion que trae las categorias
        
 }
 function homePage() {

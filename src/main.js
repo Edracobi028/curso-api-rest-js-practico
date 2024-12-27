@@ -56,13 +56,50 @@ async function getCategoriesPreview() {
         categoryTitle.setAttribute('id', 'id' + category.id); //agregar atributo id (tipo + valor) 
         
         const categoryTitleText = document.createTextNode(category.name);
-
+        
         //conectar los elementos creados al elemento del index
         categoryTitle.appendChild(categoryTitleText);  // meter el texto al h3
+        categoryTitle.addEventListener('click', () =>{
+            //location.hash = '#category=' + category.id + '-' + category.name;
+            location.hash = `#category=${category.id}-${category.name}`;
+        } )  //Crear un evento cada que cree una categoria
         categoryContainer.appendChild(categoryTitle); // meter la h3 al div
         categoriesPreviewList.appendChild(categoryContainer); // meter el container a la seccion
 
     });
 
 }
+
+async function getMoviesByCategory(id) {
+    //obtener por axios llamar api asincrono endpoint + pasar los id n un objeto por parametro
+    const { data } = await api('discover/movie',{
+        params:{
+            with_genres: id,
+        }
+    });
+    const movies = data.results;
+    genericSection.innerHTML = ""; //Limpiamos para despues insertar las peliculas
+
+    
+    movies.forEach(movie  => { //Iterar para cargar con cada pelicula las tarjetas del index
+        
+        const movieContainer = document.createElement('div'); //crear un div y 
+        movieContainer.classList.add('movie-container');  // agregar la clase del css movie-container'
+
+        const movieImg = document.createElement('img'); //crear un img 
+        movieImg.classList.add('movie-img');  // agregar la clase del css 
+        movieImg.setAttribute('alt',movie.title); //agregar atributo (tipo + valor) alt
+        movieImg.setAttribute(
+            'src',
+            'https://image.tmdb.org/t/p/w300' + movie.poster_path,); //agregar atributo (tipo + valor) alt
+        
+        //conectar los elementos creados al elemento del index
+        movieContainer.appendChild(movieImg); // meter la img al div
+        genericSection.appendChild(movieContainer); // meter el container a la seccion
+
+    });
+
+}
+
+
 
