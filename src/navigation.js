@@ -29,7 +29,10 @@ function navigator() {
     } else {
         homePage();
     }
-    location.hash
+    //location.hash;
+    document.body.scrollTop = 0; //Posicione inicialmente hasta arriba
+    document.documentElement.scrollTop = 0; //Posicione inicialmente hasta arriba (Safari)
+
 }
 
 function trendsPage() {

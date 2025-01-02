@@ -11,11 +11,12 @@ const api = axios.create({
     },
 });
 
-//Crear una funcion asincrona para obtener las peliculas en tendencia
-async function getTrendingMoviesPreview() {
-    const { data } = await api('trending/movie/day'); //obtener por axios llamar api asincrono + API KEY
-    const movies = data.results;
-    trendingMoviesPreviewList.innerHTML = "";
+// Utils
+
+function createMovies(movies, container){ //peliculas y el apendchild que muestre peliculas
+    
+    container.innerHTML = ''; //vaciar para evitar duplicar
+    
     //Iterar para cargar con cada pelicula las tarjetas del index
     movies.forEach(movie  => {
         
@@ -31,19 +32,14 @@ async function getTrendingMoviesPreview() {
         
         //conectar los elementos creados al elemento del index
         movieContainer.appendChild(movieImg); // meter la img al div
-        trendingMoviesPreviewList.appendChild(movieContainer); // meter el container a la seccion
+        container.appendChild(movieContainer); // meter el container a la seccion
 
     });
-
 }
 
-async function getCategoriesPreview() {
-    
-    const { data } = await api('genre/movie/list'); //obtener por axios llamar api asincrono + API KEY
-    const categories = data.genres;
+function createCategories(categories, container){
+    container.innerHTML = "";
 
-    //Limpiar
-    categoriesPreviewList.innerHTML = "";
     //Iterar para cargar con cada pelicula las tarjetas del index
     categories.forEach(category  => {
         
@@ -64,9 +60,28 @@ async function getCategoriesPreview() {
             location.hash = `#category=${category.id}-${category.name}`;
         } )  //Crear un evento cada que cree una categoria
         categoryContainer.appendChild(categoryTitle); // meter la h3 al div
-        categoriesPreviewList.appendChild(categoryContainer); // meter el container a la seccion
+        container.appendChild(categoryContainer); // meter el container a la seccion
 
     });
+
+}
+
+//Llamados a la API
+
+//Crear una funcion asincrona para obtener las peliculas en tendencia
+async function getTrendingMoviesPreview() {
+    const { data } = await api('trending/movie/day'); //obtener por axios llamar api asincrono + API KEY
+    const movies = data.results;
+    createMovies(movies,trendingMoviesPreviewList); //enviar array peliculas y el nombre del contenedor
+}
+
+async function getCategoriesPreview() {
+    
+    const { data } = await api('genre/movie/list'); //obtener por axios llamar api asincrono + API KEY
+    const categories = data.genres;
+
+    //enviamos el array con categorias y el nombre de container
+    createCategories(categories, categoriesPreviewList); 
 
 }
 
@@ -78,27 +93,7 @@ async function getMoviesByCategory(id) {
         }
     });
     const movies = data.results;
-    genericSection.innerHTML = ""; //Limpiamos para despues insertar las peliculas
-
-    
-    movies.forEach(movie  => { //Iterar para cargar con cada pelicula las tarjetas del index
-        
-        const movieContainer = document.createElement('div'); //crear un div y 
-        movieContainer.classList.add('movie-container');  // agregar la clase del css movie-container'
-
-        const movieImg = document.createElement('img'); //crear un img 
-        movieImg.classList.add('movie-img');  // agregar la clase del css 
-        movieImg.setAttribute('alt',movie.title); //agregar atributo (tipo + valor) alt
-        movieImg.setAttribute(
-            'src',
-            'https://image.tmdb.org/t/p/w300' + movie.poster_path,); //agregar atributo (tipo + valor) alt
-        
-        //conectar los elementos creados al elemento del index
-        movieContainer.appendChild(movieImg); // meter la img al div
-        genericSection.appendChild(movieContainer); // meter el container a la seccion
-
-    });
-
+    createMovies(movies, genericSection);
 }
 
 
