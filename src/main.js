@@ -96,5 +96,16 @@ async function getMoviesByCategory(id) {
     createMovies(movies, genericSection);
 }
 
+async function getMoviesBySearch(query) {
+    //obtener por axios llamar api asincrono endpoint + pasar los id n un objeto por parametro
+    const { data } = await api('search/movie',{
+        params:{
+            query,
+        }
+    });
+    const movies = data.results;
+    createMovies(movies, genericSection);
+}
+
 
 

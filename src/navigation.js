@@ -1,6 +1,8 @@
 //Escuchar cuando click al boton busqueda y cambiar el hash search
 searchFormBtn.addEventListener('click', () => {
-    location.hash = '#search=';
+    
+    
+    location.hash = '#search=' + searchFormInput.value;
 });
 //Llamar boton ver mas
 trendingBtn.addEventListener('click', () => {
@@ -59,13 +61,17 @@ function searchPage() {
     arrowBtn.classList.remove('inactive'); //Aparecer
     arrowBtn.classList.remove('header-arrow--white'); //Aparecer
     headerTitle.classList.add('inactive'); //Ocultar
-    headerCategoryTitle.classList.remove('inactive'); //Aparecer
+    headerCategoryTitle.classList.add('inactive'); //Aparecer
     searchForm.classList.remove('inactive'); //Aparecer
 
     trendingPreviewSection.classList.add('inactive'); //Aparecer
     categoriesPreviewSection.classList.add('inactive'); //Aparecer
     genericSection.classList.remove('inactive'); //Ocultar    
     movieDetailSection.classList.add('inactive'); //Ocultar
+
+    // ['#search', 'buscardor']
+    const [_,query] = location.hash.split('='); //Nombramos sus dos partes y Separamos en dos la url
+    getMoviesBySearch(query); //envia lo que el usuario busca
 }
 function movieDetailsPage() {
     console.log('Movie!!');
@@ -117,7 +123,7 @@ function homePage() {
     arrowBtn.classList.add('inactive'); //Ocultar flecha
     arrowBtn.classList.remove('header-arrow--white'); //Ocultar
     headerTitle.classList.remove('inactive'); //Aparecer
-    headerCategoryTitle.classList.remove('inactive'); //Aparecer
+    headerCategoryTitle.classList.add('inactive'); //Aparecer
     searchForm.classList.remove('inactive'); //Aparecer
 
     trendingPreviewSection.classList.remove('inactive'); //Aparecer
