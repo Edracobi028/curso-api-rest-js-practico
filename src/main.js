@@ -22,7 +22,10 @@ function createMovies(movies, container){ //peliculas y el apendchild que muestr
         
         const movieContainer = document.createElement('div'); //crear un div y 
         movieContainer.classList.add('movie-container');  // agregar la clase del css movie-container'
-
+        
+        movieContainer.addEventListener('click', ()=>{ //Agregar la funcion de click para que nos lleve a detalles
+            location.hash = '#movie=' + movie.id; //agregar al hashel id de la pelicula
+        }); 
         const movieImg = document.createElement('img'); //crear un img 
         movieImg.classList.add('movie-img');  // agregar la clase del css 
         movieImg.setAttribute('alt',movie.title); //agregar atributo (tipo + valor) alt
@@ -72,6 +75,8 @@ function createCategories(categories, container){
 async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day'); //obtener por axios llamar api asincrono + API KEY
     const movies = data.results;
+    console.log(movies);
+    
     createMovies(movies,trendingMoviesPreviewList); //enviar array peliculas y el nombre del contenedor
 }
 
@@ -114,5 +119,30 @@ async function getTrendingMovies() {
     createMovies(movies,genericSection); //enviar array peliculas y el nombre del contenedor
 }
 
+//Funcion asincrona para traer detalles por API
+async function getMovieByID(id) {
+    //obtener por axios llamar api asincrono + endpoint renombrando el objeto data a movie
+    const { data: movie } = await api('movie/' + id); 
+
+    /* CARGAR INFO A LOS NODES */
+    
+    const movieImgUrl = 'https://image.tmdb.org/t/p/w500' + movie.poster_path; //guardar en variable url de imagen
+    //cargar la imagen con una sombra negra para hacer visible el boton back blanco
+    headerSection.style.background = `
+    linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.35) 19.27%, 
+        rgba(0, 0, 0, 0) 29.17%
+    ), 
+        url(${movieImgUrl})
+    `;
+    movieDetailTitle.textContent = movie.title;
+    movieDetailDescription.textContent = movie.overview; //descripcion
+    movieDetailScore.textContent = movie.vote_average; //ranking
+
+    //cargar categorias relacionadas
+    createCategories(movie.genres, movieDetailCategoriesList); //enviar array generos de esta pelicula  + contenedor 
+    
+}
 
 

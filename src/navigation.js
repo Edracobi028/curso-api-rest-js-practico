@@ -82,7 +82,7 @@ function searchPage() {
 }
 function movieDetailsPage() {
     console.log('Movie!!');
-
+    /* MODIFICACION DEL DOM */
     headerSection.classList.add('header-container--long'); //remover la clase 
     headerSection.style.background = ''; //Limpiar la propiedad background una imagen de poster de pelicula
     arrowBtn.classList.remove('inactive'); //Aparecer
@@ -90,12 +90,16 @@ function movieDetailsPage() {
     headerTitle.classList.add('inactive'); //Aparecer
     headerCategoryTitle.classList.add('inactive'); //Ocultar
     searchForm.classList.add('inactive'); //Ocultar
-
     trendingPreviewSection.classList.add('inactive'); //Ocultar
     categoriesPreviewSection.classList.add('inactive'); //Ocultar
     genericSection.classList.add('inactive'); //Ocultar    
     movieDetailSection.classList.remove('inactive'); //Aparecer 
 
+    // ['#movie', 'id']
+    const [_,movieId] = location.hash.split('='); //Dividir y nombrar sus dos partes y separamos en dos la url (hash)
+    
+    
+    getMovieByID(movieId); //Obtener detalles de pelicula pasando el id de la pelicula
 }
 function categoriesPage() {
     console.log('Categories!!');
