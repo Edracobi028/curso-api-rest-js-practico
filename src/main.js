@@ -107,5 +107,12 @@ async function getMoviesBySearch(query) {
     createMovies(movies, genericSection);
 }
 
+//Crear una funcion asincrona para obtener las peliculas en tendencia
+async function getTrendingMovies() {
+    const { data } = await api('trending/movie/day'); //obtener por axios llamar api asincrono + API KEY
+    const movies = data.results;
+    createMovies(movies,genericSection); //enviar array peliculas y el nombre del contenedor
+}
+
 
 

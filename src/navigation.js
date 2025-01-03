@@ -10,7 +10,10 @@ trendingBtn.addEventListener('click', () => {
 });
 
 // Escuchar al dar click para Mandar a home
-arrowBtn.addEventListener('click', () => {location.hash = '#home';})
+arrowBtn.addEventListener('click', () => {
+    history.back(); //Para ir hacia atras segun lo visto
+    //location.hash = '#home';
+});
 window.addEventListener('DOMContentLoaded', navigator, false); //Escuchar evento al cargar la app + llamar la funcion + false
 window.addEventListener('hashchange', navigator   , false); //Escuchar evento hashchange + llamar la funcion + false
 
@@ -52,6 +55,10 @@ function trendsPage() {
     categoriesPreviewSection.classList.add('inactive'); //Aparecer
     genericSection.classList.remove('inactive'); //Ocultar    
     movieDetailSection.classList.add('inactive'); //Ocultar
+
+    headerCategoryTitle.innerHTML = 'Tendencias';  //Nombrar tendencias
+
+    getTrendingMovies();
 }
 function searchPage() {
     console.log('Search!!');
