@@ -144,5 +144,6 @@ async function getMovieByID(id) {
     createCategories(movie.genres, movieDetailCategoriesList); //enviar array generos de esta pelicula  + contenedor 
     
 }
+//Cambios actuales
 
 
