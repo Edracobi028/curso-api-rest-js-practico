@@ -143,7 +143,12 @@ async function getMovieByID(id) {
     //cargar categorias relacionadas
     createCategories(movie.genres, movieDetailCategoriesList); //enviar array generos de esta pelicula  + contenedor 
     
+    getRelatedMoviesId(id);//traer las peliculas relacionadas
 }
-//Cambios actuales
-
+//Funcion asincrona para obtener de API
+async function getRelatedMoviesId(id) {
+    const { data } = await api('movie/' + id + '/recommendations'); //Solicitud a API por axios
+    const relatedMovies = data.results; //guardar en variable la respuesta de la API
+    createMovies(relatedMovies, relatedMoviesContainer) //insertar las peliculas data + contenedor
+}
 
