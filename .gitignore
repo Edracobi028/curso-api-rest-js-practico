@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # sECRETS.JS (API KEY)
-src/secrets.js
+# src/secrets.js // No funciono al publicarlo
